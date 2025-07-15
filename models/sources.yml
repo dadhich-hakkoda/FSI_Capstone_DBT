@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_data
+    schema: FSI_CAPSTONE_HARSH
+    database: DEBBIE_DB
+    tables:
+      - name: FOREX
+        identifier: raw_forex
+      - name: CRYPTO
+        identifier: raw_crypto
+      - name: ETFS
+        identifier: raw_etfs
+      - name: STOCKS
+        identifier: raw_stocks

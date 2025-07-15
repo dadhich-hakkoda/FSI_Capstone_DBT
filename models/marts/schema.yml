@@ -1,0 +1,52 @@
+# models/marts/schema.yml
+version: 2
+
+models:
+  - name: dim_symbol
+    description: Dimension table for financial symbols
+    columns:
+      - name: symbol_key
+        description: Surrogate key for symbol
+        tests:
+          - unique
+          - not_null
+      - name: symbol
+        description: Financial symbol
+        tests:
+          - not_null
+      - name: asset_type
+        description: Type of financial asset
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['ETF', 'FOREX', 'CRYPTO', 'STOCK']
+
+  - name: dim_date
+    description: Dimension table for dates
+    columns:
+      - name: date_key
+        description: Surrogate key for date
+        tests:
+          - unique
+          - not_null
+      - name: date_transaction
+        description: Transaction date
+        tests:
+          - not_null
+
+  - name: fct_transactions
+    description: Fact table for financial transactions
+    columns:
+      - name: transaction_key
+        description: Surrogate key for transaction
+        tests:
+          - unique
+          - not_null
+      - name: symbol_key
+        description: Foreign key to dim_symbol
+        tests:
+          - not_null
+      - name: date_key
+        description: Foreign key to dim_date
+        tests:
+          - not_null
